@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">HTML & CSS Quiz</h2>
+<form method="post" action="{{ url_for('result') }}">
+    {% for q in questions %}
+    <div class="card mb-3 p-3 shadow-sm">
+        <h5>Q{{ q.id }}. {{ q.question }}</h5>
+        <div class="options">
+            {% for opt in q.options %}
+            <label class="option-label">
+                <input type="radio" name="{{ q.id }}" value="{{ opt }}" required>
+                <span class="heart-radio"></span>
+                {{ opt }}
+            </label><br>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="text-center">
+        <button type="submit" class="btn submit-btn">Submit Answers</button>
+    </div>
+</form>
+{% endblock %}

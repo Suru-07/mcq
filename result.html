@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="result-page text-center">
+    <h2>Your Score: {{ score }} / {{ total }}</h2>
+    <hr>
+    {% for r in results %}
+    <div class="card mb-3 p-3 {% if r.is_correct %}border-success{% else %}border-danger{% endif %}">
+        <p><strong>Q: {{ r.question }}</strong></p>
+        <p>Your Answer: {{ r.selected or "Not answered" }}</p>
+        <p>Correct Answer: {{ r.correct_answer }}</p>
+        {% if r.is_correct %}
+            <p class="text-success">✔ Correct!</p>
+        {% else %}
+            <p class="text-danger">✘ Wrong</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <a href="{{ url_for('index') }}" class="btn start-btn mt-4">Try Again</a>
+</div>
+{% endblock %}
